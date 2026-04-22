@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>⚔ War Intel — Setup Guide</title>
+<style>
+    :root {
+        --red:    #c0392b;
+        --purple: #7a7aff;
+        --dark:   #0f0f12;
+        --dark2:  #13131a;
+        --dark3:  #1a1a22;
+        --dark4:  #1e1e2e;
+        --border: #2d2d4a;
+        --text:   #c9c9d4;
+        --muted:  #888888;
+        --white:  #ffffff;
+        --green:  #4caf50;
+        --orange: #ff9800;
+        --blue:   #7a9aff;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--dark); color: var(--text); font-family: -apple-system, 'Segoe UI', Arial, sans-serif; font-size: 15px; line-height: 1.7; }
+    .page { max-width: 900px; margin: 0 auto; padding: 40px 24px 80px; }
+
+    /* ── Hero ── */
+    .hero { padding: 48px 0 40px; border-bottom: 1px solid var(--border); margin-bottom: 40px; }
+    .hero h1 { font-size: 42px; font-weight: 800; letter-spacing: .04em; line-height: 1.1; margin-bottom: 10px; }
+    .hero h1 .red    { color: var(--red); }
+    .hero h1 .purple { color: var(--purple); }
+    .hero .subtitle  { color: var(--muted); font-size: 16px; margin-top: 6px; }
+    .badges { display: flex; gap: 10px; margin-top: 18px; flex-wrap: wrap; }
+    .badge { font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 20px; letter-spacing: .06em; text-transform: uppercase; }
+    .badge-red    { background: #2a1010; color: var(--red);    border: 1px solid #4a1a1a; }
+    .badge-purple { background: #1a1a2e; color: var(--purple); border: 1px solid #2d2d4a; }
+    .badge-green  { background: #1a2a1a; color: var(--green);  border: 1px solid #2a3a2a; }
+    .dl-buttons { display: flex; gap: 12px; margin-top: 24px; flex-wrap: wrap; }
+    .dl-btn { display: inline-block; padding: 10px 20px; border-radius: 6px; font-size: 13px; font-weight: 700; letter-spacing: .04em; text-decoration: none; }
+    .dl-btn:hover { opacity: .8; text-decoration: none; }
+    .dl-btn-red    { background: var(--red);    color: var(--white); }
+    .dl-btn-purple { background: var(--purple); color: var(--white); }
+
+    /* ── TOC ── */
+    .toc { background: var(--dark3); border: 1px solid var(--border); border-radius: 8px; padding: 20px 24px; margin-bottom: 40px; }
+    .toc h4 { color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: .1em; margin-bottom: 12px; }
+    .toc ol { padding-left: 18px; }
+    .toc li { margin-bottom: 6px; font-size: 14px; }
+    .toc a { color: var(--text); } .toc a:hover { color: var(--purple); }
+
+    /* ── Headings ── */
+    h2 { font-size: 22px; font-weight: 700; color: var(--red); margin: 52px 0 18px; padding-bottom: 10px; border-bottom: 2px solid var(--border); }
+    h3 { font-size: 16px; font-weight: 700; color: var(--purple); margin: 28px 0 10px; }
+    p  { margin-bottom: 12px; color: var(--text); }
+    a  { color: var(--purple); text-decoration: none; } a:hover { text-decoration: underline; color: var(--white); }
+    code { background: #1a1a2e; color: var(--purple); padding: 2px 7px; border-radius: 4px; font-family: 'Courier New', monospace; font-size: 13px; }
+    ul { padding-left: 20px; margin: 10px 0; }
+    ul li { margin-bottom: 7px; color: #aaa; font-size: 14px; line-height: 1.6; }
+    ul li strong { color: var(--white); }
+
+    /* ── Boxes ── */
+    .info-box { background: var(--dark3); border-left: 4px solid var(--purple); border-radius: 0 6px 6px 0; padding: 16px 18px; margin: 16px 0; font-size: 14px; }
+    .info-box .info-title { font-weight: 700; color: var(--white); margin-bottom: 8px; }
+    .info-box p { color: #aaa; margin-bottom: 6px; } .info-box p:last-child { margin-bottom: 0; }
+    .info-box .label { color: var(--muted); font-weight: 600; }
+    .warn-box { background: #1a100a; border-left: 4px solid var(--orange); border-radius: 0 6px 6px 0; padding: 12px 16px; margin: 14px 0; font-size: 13px; color: #ccaa88; }
+    .warn-box strong { color: var(--orange); }
+
+    /* ── Steps ── */
+    .steps { display: flex; flex-direction: column; gap: 2px; margin: 16px 0; }
+    .step { display: flex; align-items: flex-start; background: var(--dark2); border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
+    .step-num { background: var(--red); color: var(--white); font-weight: 800; font-size: 16px; min-width: 48px; display: flex; align-items: center; justify-content: center; align-self: stretch; flex-shrink: 0; }
+    .step-body { padding: 14px 16px; flex: 1; }
+    .step-title { font-weight: 700; color: var(--white); margin-bottom: 4px; font-size: 14px; }
+    .step-desc { color: #aaa; font-size: 13px; line-height: 1.6; margin: 0; }
+
+    /* ── Tables ── */
+    .data-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 13px; }
+    .data-table th { background: var(--dark3); color: var(--purple); font-size: 11px; text-transform: uppercase; letter-spacing: .1em; padding: 10px 14px; text-align: left; border: 1px solid var(--border); }
+    .data-table td { padding: 9px 14px; border: 1px solid #1e1e28; vertical-align: top; color: #aaa; }
+    .data-table tr:nth-child(odd) td  { background: var(--dark); }
+    .data-table tr:nth-child(even) td { background: var(--dark2); }
+    .data-table .yes  { color: var(--green); font-weight: 700; }
+    .data-table .name { color: var(--white); font-weight: 600; }
+
+    /* ── Feature grid ── */
+    .feature-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 16px 0; }
+    @media (max-width: 600px) { .feature-grid { grid-template-columns: 1fr; } }
+    .feature-card { background: var(--dark2); border: 1px solid var(--border); border-radius: 6px; padding: 14px 16px; }
+    .fc-icon  { font-size: 18px; margin-bottom: 6px; }
+    .fc-title { font-weight: 700; color: var(--white); font-size: 13px; margin-bottom: 4px; }
+    .fc-desc  { font-size: 12px; color: #777; line-height: 1.5; }
+
+    /* ── Tab demo ── */
+    .tab-demo { display: flex; gap: 6px; margin: 12px 0; flex-wrap: wrap; }
+    .tab { padding: 5px 14px; border-radius: 4px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; border: 1px solid var(--border); background: var(--dark3); color: #555; }
+    .tab.active { background: var(--dark4); color: var(--purple); border-color: #7a7aff55; }
+
+    /* ── Tier dots ── */
+    .dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; vertical-align: middle; }
+
+    /* ── Timer sections ── */
+    .timer-sections { display: flex; flex-direction: column; gap: 6px; margin: 12px 0; }
+    .timer-section { display: flex; align-items: center; gap: 10px; padding: 8px 12px; background: var(--dark2); border: 1px solid var(--border); border-radius: 6px; font-size: 13px; }
+    .timer-section .ts-icon  { font-size: 16px; flex-shrink: 0; }
+    .timer-section .ts-label { font-weight: 700; }
+    .timer-section .ts-desc  { color: #666; font-size: 12px; margin-left: auto; }
+
+    .version { display: inline-block; background: #1a1a2e; border: 1px solid var(--border); color: var(--muted); font-size: 10px; padding: 2px 8px; border-radius: 10px; margin-left: 8px; vertical-align: middle; }
+    hr { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
+    .footer { margin-top: 60px; padding-top: 20px; border-top: 1px solid var(--border); color: var(--muted); font-size: 12px; text-align: center; }
+</style>
+</head>
+<body>
+<div class="page">
+
+    <!-- Hero -->
+    <div class="hero">
+        <h1><span class="red">⚔ WAR </span><span class="purple">INTEL</span></h1>
+        <div class="subtitle">Setup &amp; Feature Guide <span class="version">Latest</span></div>
+        <div class="badges">
+            <span class="badge badge-red">Desktop</span>
+            <span class="badge badge-purple">TornPDA Mobile</span>
+            <span class="badge badge-green">Free</span>
+        </div>
+        <div class="dl-buttons">
+            <a class="dl-btn dl-btn-red"    href="https://greasyfork.org/en/scripts/574906-torn-war-intelligence-dashboard-v6-3" target="_blank">⬇ Install Desktop Script</a>
+            <a class="dl-btn dl-btn-purple" href="https://greasyfork.org/en/scripts/574909-torn-war-intelligence-tornpda-mobile" target="_blank">⬇ Install TornPDA Script</a>
+        </div>
+    </div>
+
+    <!-- TOC -->
+    <div class="toc">
+        <h4>Contents</h4>
+        <ol>
+            <li><a href="#overview">Overview</a></li>
+            <li><a href="#keys">What You Need — API Keys</a></li>
+            <li><a href="#desktop-install">Desktop Installation (Tampermonkey)</a></li>
+            <li><a href="#mobile-install">TornPDA Installation (Mobile)</a></li>
+            <li><a href="#desktop-features">Desktop Features</a></li>
+            <li><a href="#mobile-features">TornPDA Features</a></li>
+            <li><a href="#export">Export Report</a></li>
+            <li><a href="#tiers">Threat Tier Reference</a></li>
+            <li><a href="#troubleshooting">Troubleshooting</a></li>
+        </ol>
+    </div>
+
+    <!-- Overview -->
+    <h2 id="overview">Overview</h2>
+    <p>War Intel is a userscript that automatically detects your active Torn ranked war, pulls enemy faction member data, and enriches it with battle stat and Fair Fight predictions from FFScouter — displayed in a live dashboard that refreshes automatically.</p>
+    <ul>
+        <li><strong>Desktop</strong> — Floating, resizable panel with sortable columns, filter views, attack buttons, hospital timers, and a formatted HTML export for Torn mail. Installed via Tampermonkey.</li>
+        <li><strong>TornPDA (Mobile)</strong> — Full-width bottom sheet with filter tabs, card-based member view, FF scores, hospital/jail timers, travel status, and one-tap attack links. Installed via TornPDA's built-in script manager.</li>
+    </ul>
+
+    <!-- Keys -->
+    <h2 id="keys">What You Need — API Keys</h2>
+    <h3>1. Torn API Key</h3>
+    <p>Your Torn API key lets the script fetch faction war data and enemy member information.</p>
+    <div class="info-box">
+        <div class="info-title">🔑 Generating your Torn API Key</div>
+        <p><span class="label">Settings page:</span> <a href="https://www.torn.com/preferences.php#tab=api" target="_blank">torn.com → Preferences → API</a></p>
+        <p><span class="label">Direct link (pre-fills required permissions):</span><br>
+        <a href="https://www.torn.com/preferences.php#tab=api?step=addNewKey&title=WarIntel&faction=basic,rankedwars,members" target="_blank">Generate key with faction: basic, rankedwars, members</a></p>
+    </div>
+    <table class="data-table">
+        <thead><tr><th>Permission</th><th>Required?</th><th>Why it's needed</th></tr></thead>
+        <tbody>
+            <tr><td class="name"><code>faction → basic</code></td><td class="yes">Yes</td><td>Identifies your faction name and ID</td></tr>
+            <tr><td class="name"><code>faction → rankedwars</code></td><td class="yes">Yes</td><td>Detects your active ranked war and scores</td></tr>
+            <tr><td class="name"><code>faction → members</code></td><td class="yes">Yes</td><td>Fetches the enemy member list with live status</td></tr>
+        </tbody>
+    </table>
+    <div class="warn-box"><strong>⚠ Note:</strong> A <strong>Limited Access</strong> or <strong>Full Access</strong> key includes all of the above by default. If using a <strong>Custom Key</strong>, make sure all three faction selections are ticked.</div>
+
+    <h3>2. FFScouter Key (Optional but Recommended)</h3>
+    <p>FFScouter is a free community tool that estimates enemy battle stats and Fair Fight scores. Without it the dashboard shows names, IDs, levels and status — but Est. Stats, FF scores and stat distribution will be empty.</p>
+    <div class="info-box">
+        <div class="info-title">🔑 Registering with FFScouter</div>
+        <p>Visit <a href="https://ffscouter.com/" target="_blank">ffscouter.com</a> and sign up using the same Torn API key you use for this script. You must read and agree to the FFScouter Data Policy — the script will prompt you to confirm this when you enter your key.</p>
+        <p><span class="label">Your FFScouter key is the same 16-character Torn API key you registered with on their site.</span></p>
+    </div>
+
+    <!-- Desktop Install -->
+    <h2 id="desktop-install">Desktop Installation (Tampermonkey)</h2>
+    <h3>Step 1 — Install Tampermonkey</h3>
+    <p>Tampermonkey is a free browser extension that runs userscripts. Install it from <a href="https://www.tampermonkey.net/" target="_blank">tampermonkey.net</a> — supports Chrome, Edge, Firefox, and Safari.</p>
+    <div class="warn-box"><strong>⚠ Chrome users:</strong> If the script doesn't appear after installation, enable Developer Mode in Chrome's Extensions settings. See <a href="https://www.tampermonkey.net/faq.php#Q209" target="_blank">tampermonkey.net/faq#Q209</a>.</div>
+
+    <h3>Step 2 — Install the Script</h3>
+    <div class="steps">
+        <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">Install from Greasy Fork</div><p class="step-desc">Visit <a href="https://greasyfork.org/en/scripts/574906-torn-war-intelligence-dashboard-v6-3" target="_blank">greasyfork.org — Torn War Intelligence Dashboard</a> and click <strong>Install this script</strong>.</p></div></div>
+        <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">Confirm installation</div><p class="step-desc">Tampermonkey opens a new tab showing the script details. Click <strong>Install</strong> to confirm.</p></div></div>
+        <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Navigate to Torn</div><p class="step-desc">Open <a href="https://www.torn.com" target="_blank">torn.com</a>. The ⚔ WAR INTEL panel appears in the top-right corner of the page.</p></div></div>
+    </div>
+
+    <h3>Step 3 — Enter Your API Keys</h3>
+    <div class="steps">
+        <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">Open Settings</div><p class="step-desc">Click <strong>⚙ Settings</strong> in the War Intel panel header.</p></div></div>
+        <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">Agree to FFScouter policy</div><p class="step-desc">Read the FFScouter data policy (linked in the panel) and tick the checkbox to confirm.</p></div></div>
+        <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Enter your keys</div><p class="step-desc">Paste your Torn API key into <strong>TORN API KEY</strong> and optionally your FFScouter key into <strong>FFSCOUTER KEY</strong>.</p></div></div>
+        <div class="step"><div class="step-num">4</div><div class="step-body"><div class="step-title">Save &amp; Fetch</div><p class="step-desc">Click <strong>💾 Save &amp; Fetch</strong>. Enemy members load automatically if your faction is in an active ranked war.</p></div></div>
+    </div>
+
+    <!-- Mobile Install -->
+    <h2 id="mobile-install">TornPDA Installation (Mobile)</h2>
+    <p>TornPDA is a mobile client for Torn with a built-in userscript manager — no separate extension needed.</p>
+    <h3>Step 1 — Install TornPDA</h3>
+    <p>Download TornPDA from the App Store (iOS) or Google Play (Android) and log in with your Torn account.</p>
+    <h3>Step 2 — Install the Script</h3>
+    <div class="steps">
+        <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">Open TornPDA Userscripts</div><p class="step-desc">Tap the profile icon → <strong>Settings</strong> → <strong>Userscripts</strong>.</p></div></div>
+        <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">Add from Greasy Fork</div><p class="step-desc">Tap <strong>+</strong> and enter the URL: <a href="https://greasyfork.org/en/scripts/574909-torn-war-intelligence-tornpda-mobile" target="_blank">greasyfork.org — Torn War Intelligence TornPDA Mobile</a></p></div></div>
+        <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Enable and restart</div><p class="step-desc">Make sure the script is toggled <strong style="color:var(--green)">ON</strong>. Fully restart TornPDA.</p></div></div>
+        <div class="step"><div class="step-num">4</div><div class="step-body"><div class="step-title">Navigate to Torn</div><p class="step-desc">Open any Torn page. The ⚔ WAR INTEL bar appears at the bottom of the screen. Tap it to expand.</p></div></div>
+    </div>
+    <h3>Step 3 — Enter Your API Keys</h3>
+    <p>Tap ⚙ in the panel header, agree to the FFScouter policy, enter your keys, and tap <strong>💾 Save &amp; Fetch</strong>.</p>
+
+    <!-- Desktop Features -->
+    <h2 id="desktop-features">Desktop Features</h2>
+
+    <h3>Panel &amp; Layout</h3>
+    <div class="feature-grid">
+        <div class="feature-card"><div class="fc-icon">↔</div><div class="fc-title">Resizable Window</div><div class="fc-desc">Drag the triangle grip in the bottom-right corner to resize the panel to any width or height.</div></div>
+        <div class="feature-card"><div class="fc-icon">⟺</div><div class="fc-title">Resizable Columns</div><div class="fc-desc">Hover over the right edge of any column header and drag to adjust that column's width independently.</div></div>
+        <div class="feature-card"><div class="fc-icon">✕</div><div class="fc-title">Hide to Side Button</div><div class="fc-desc">Click ✕ to hide the panel completely. A small ⚔ WAR tab appears on the left edge of the screen — click it to restore. State persists between page changes.</div></div>
+        <div class="feature-card"><div class="fc-icon">↻</div><div class="fc-title">Auto-Refresh</div><div class="fc-desc">Panel refreshes every 60 seconds automatically to keep hospital, travel, and status current during war.</div></div>
+    </div>
+
+    <h3>Filter Views</h3>
+    <div class="tab-demo">
+        <div class="tab active">⚔ By Stats</div>
+        <div class="tab">⏱ By Timer</div>
+    </div>
+    <ul>
+        <li><strong>⚔ By Stats</strong> — Default view. All members sorted and grouped into threat tiers by estimated battle stats. All columns are sortable by clicking the headers.</li>
+        <li><strong>⏱ By Timer</strong> — Reorganises the table into sections based on availability: <em>In Hospital/Jail</em> (soonest out first), <em>Out Soon</em> (timer expired), and <em>Available Now</em> (sorted by stats). Ideal for timing attacks during a war.</li>
+    </ul>
+
+    <h3>Columns</h3>
+    <table class="data-table">
+        <thead><tr><th>Column</th><th>Description</th></tr></thead>
+        <tbody>
+            <tr><td class="name">Name</td><td>Player name (links to profile) with a <strong>⚔</strong> attack button — click ⚔ to go directly to the attack page</td></tr>
+            <tr><td class="name">ID</td><td>Torn player ID</td></tr>
+            <tr><td class="name">Lvl</td><td>Player level</td></tr>
+            <tr><td class="name">Status</td><td>Full current status from the Torn API (e.g. "Traveling to Japan", "In hospital")</td></tr>
+            <tr><td class="name">Free In</td><td>Live countdown for hospitalised or jailed players — ticks every second. Shows "Soon ✓" when timer expires.</td></tr>
+            <tr><td class="name">Est. Stats</td><td>FFScouter's estimated total battle stats (e.g. 2.99b, 450m)</td></tr>
+            <tr><td class="name">FF</td><td>Fair Fight score — <span style="color:#4caf50">green &lt;1.5</span>, <span style="color:#ffc107">yellow 1.5–2.49</span>, <span style="color:#ff7043">red ≥2.5</span></td></tr>
+            <tr><td class="name">Dist.</td><td>Stat distribution e.g. STR 60% SPD 30% (FFScouter premium only)</td></tr>
+            <tr><td class="name">Data Age</td><td>How old FFScouter's estimate is for that player</td></tr>
+        </tbody>
+    </table>
+
+    <h3>Other Tools</h3>
+    <ul>
+        <li><strong>⬇ Export</strong> — Downloads a TXT file containing HTML markup. Open it, select all, copy, and paste into Torn mail or a forum post. The report groups members into threat tiers with your faction vs enemy header and clickable profile links.</li>
+        <li><strong>🔍 Debug mode</strong> — Click the magnifying glass icon and open Settings to see raw API responses — useful if something isn't loading correctly.</li>
+    </ul>
+
+    <!-- Mobile Features -->
+    <h2 id="mobile-features">TornPDA Features</h2>
+
+    <h3>Panel &amp; Navigation</h3>
+    <div class="feature-grid">
+        <div class="feature-card"><div class="fc-icon">▲▼</div><div class="fc-title">Expand / Collapse</div><div class="fc-desc">Tap the header bar or ▲/▼ arrow to show or hide the panel. Collapse state persists between page changes.</div></div>
+        <div class="feature-card"><div class="fc-icon">⚔</div><div class="fc-title">Side Button</div><div class="fc-desc">When collapsed, a small ⚔ WAR tab appears on the edge of the screen. Tap it to expand. Choose Left or Right side in Settings.</div></div>
+        <div class="feature-card"><div class="fc-icon">👆</div><div class="fc-title">One-Tap Attack</div><div class="fc-desc">Tap a player name to go straight to their attack page. The panel automatically collapses so you have a clear screen to attack from.</div></div>
+        <div class="feature-card"><div class="fc-icon">↻</div><div class="fc-title">Auto-Refresh</div><div class="fc-desc">Refreshes every 90 seconds automatically to keep status and hospital timers current.</div></div>
+    </div>
+
+    <h3>Filter Tabs</h3>
+    <div class="tab-demo">
+        <div class="tab active">⚔ Stats</div>
+        <div class="tab">⏱ Timer</div>
+    </div>
+    <ul>
+        <li><strong>⚔ Stats</strong> — Default view. Members grouped into colour-coded threat tiers by estimated battle stats. Each card shows name, ID, level, estimated stats, Fair Fight score (colour coded), stat distribution, current status, and a hospital/jail countdown timer where applicable. Tap any tier header to collapse or expand that group.</li>
+        <li><strong>⏱ Timer</strong> — Sorts members by availability. Four sections, each collapsible:</li>
+    </ul>
+
+    <div class="timer-sections">
+        <div class="timer-section"><div class="ts-icon">⏱</div><div><div class="ts-label" style="color:#e05252">In Hospital / Jail</div><div style="font-size:12px;color:#666;">Sorted soonest out first. Live countdown on each card.</div></div><div class="ts-desc">Unavailable</div></div>
+        <div class="timer-section"><div class="ts-icon">✓</div><div><div class="ts-label" style="color:#4caf50">Out Soon</div><div style="font-size:12px;color:#666;">Timer expired, awaiting next refresh.</div></div><div class="ts-desc">Coming up</div></div>
+        <div class="timer-section"><div class="ts-icon">✈</div><div><div class="ts-label" style="color:#7a9aff">Traveling / Abroad</div><div style="font-size:12px;color:#666;">Shows destination (e.g. "Traveling to Japan"). No arrival time — Torn keeps flight times private.</div></div><div class="ts-desc">Unavailable</div></div>
+        <div class="timer-section"><div class="ts-icon">✦</div><div><div class="ts-label" style="color:#7a7aff">Available Now</div><div style="font-size:12px;color:#666;">Everyone free, sorted by stats descending.</div></div><div class="ts-desc">Hit now</div></div>
+    </div>
+
+    <h3>Member Cards</h3>
+    <p>Each member is shown as a card with:</p>
+    <ul>
+        <li><strong>Left side</strong> — Player name (tap to attack), Torn ID, level, stat distribution</li>
+        <li><strong>Right side</strong> — Estimated battle stats, Fair Fight score (colour coded), current status badge, hospital/jail countdown timer</li>
+    </ul>
+    <p>Fair Fight colours: <span style="color:#4caf50">■</span> Easy (&lt;1.5) &nbsp; <span style="color:#ffc107">■</span> Fair (1.5–2.49) &nbsp; <span style="color:#ff7043">■</span> Hard (≥2.5)</p>
+
+    <h3>Export (Mobile)</h3>
+    <ul>
+        <li><strong>iOS</strong> — Tap ⬇ to copy the full report HTML to your clipboard. A green toast confirms it. Open Torn mail and paste directly.</li>
+        <li><strong>Android</strong> — Tap ⬇ to download a TXT file containing the HTML report.</li>
+    </ul>
+    <p>The report groups members into threat tiers with your faction vs enemy header and clickable Torn profile links — ready to paste into faction mail or a forum post.</p>
+
+    <!-- Export Format -->
+    <h2 id="export">Export Report Format</h2>
+    <p>Both desktop and mobile produce the same export format — HTML markup that renders in Torn mail and forum posts. The report includes:</p>
+    <ul>
+        <li><strong>Header</strong> — Your faction name vs enemy faction name, plus total enemy count</li>
+        <li><strong>Threat tier sections</strong> — Members grouped and sorted by estimated stats within each tier</li>
+        <li><strong>Per member</strong> — Name (clickable profile link), Torn ID, estimated stats, and stat distribution where available</li>
+    </ul>
+
+    <!-- Tiers -->
+    <h2 id="tiers">Threat Tier Reference</h2>
+    <table class="data-table">
+        <thead><tr><th>Tier</th><th>Stat Range</th><th>Notes</th></tr></thead>
+        <tbody>
+            <tr><td class="name"><span class="dot" style="background:#cc3333"></span>High-Level Threats</td><td>Over 1B</td><td>Top priority — coordinate attacks carefully</td></tr>
+            <tr><td class="name"><span class="dot" style="background:#e07000"></span>Mid-Level Threats</td><td>100M – 999M</td><td>Significant threats, plan before attacking</td></tr>
+            <tr><td class="name"><span class="dot" style="background:#ccaa00"></span>Low-Level Threats</td><td>1M – 99M</td><td>Manageable individually</td></tr>
+            <tr><td class="name"><span class="dot" style="background:#4a9a4a"></span>Cannon Fodder</td><td>Under 1M</td><td>Easy hits for chains and score</td></tr>
+            <tr><td class="name"><span class="dot" style="background:#555577"></span>Too Low</td><td>Under 1K</td><td>Minimal threat or reward</td></tr>
+            <tr><td class="name"><span class="dot" style="background:#444455"></span>No Data</td><td>Unknown</td><td>FFScouter has no estimate yet — likely new or inactive players</td></tr>
+        </tbody>
+    </table>
+
+    <!-- Troubleshooting -->
+    <h2 id="troubleshooting">Troubleshooting</h2>
+
+    <h3>"No active ranked war found"</h3>
+    <p>Normal outside of war periods. The dashboard detects wars automatically — no action needed.</p>
+
+    <h3>"Torn API: ... (code 23)"</h3>
+    <p>Your API key is missing a required permission. Use the direct link in the <a href="#keys">What You Need</a> section to generate a new key, or manually add <code>faction → basic</code>, <code>rankedwars</code>, and <code>members</code> to an existing key.</p>
+
+    <h3>FFScouter shows "—" in Est. Stats or FF columns</h3>
+    <ul>
+        <li>FFScouter only has estimates for players attacked recently by other FFScouter users. New or inactive players may have no data.</li>
+        <li>Confirm your FFScouter key is registered at <a href="https://ffscouter.com/" target="_blank">ffscouter.com</a>.</li>
+    </ul>
+
+    <h3>Hospital timer shows but doesn't tick</h3>
+    <p>The ticker starts when the page loads. Try refreshing the Torn page. If the timer shows "—" the player's status has no <code>until</code> timestamp — this happens for traveling players or when the API returns a non-hospital/jail state.</p>
+
+    <h3>No flight arrival timer for traveling players</h3>
+    <p>Torn keeps flight arrival times private — they are not included in the API response. The Timer view shows who is traveling and their destination, but a countdown isn't possible with the available data.</p>
+
+    <h3>Panel not appearing on Desktop</h3>
+    <ul>
+        <li>Check the script is enabled in the Tampermonkey dashboard.</li>
+        <li>Chrome users: enable Developer Mode in Chrome Extensions — see <a href="https://www.tampermonkey.net/faq.php#Q209" target="_blank">tampermonkey.net/faq#Q209</a>.</li>
+        <li>If you previously clicked ✕ to hide the panel, look for the small ⚔ WAR tab on the left edge of the screen and click it to restore the panel.</li>
+    </ul>
+
+    <h3>Script not appearing in TornPDA</h3>
+    <ul>
+        <li>Fully close and reopen TornPDA after installing the script.</li>
+        <li>Confirm the script is toggled <strong style="color:var(--green)">ON</strong> in Settings → Userscripts.</li>
+        <li>Make sure you are on a <code>torn.com</code> page — the script only runs on Torn.</li>
+    </ul>
+
+    <h3>Export does nothing on iOS</h3>
+    <p>iOS blocks file downloads from in-app browsers. The export copies the report to your clipboard instead — a green toast confirms this. Open Torn mail and paste.</p>
+
+    <h3>General errors or broken behaviour</h3>
+    <p>Re-install by uninstalling the current script and reinstalling from Greasy Fork using the links at the top of this guide.</p>
+
+    <div class="footer">⚔ War Intel — Setup &amp; Feature Guide &nbsp;·&nbsp; Torn City Userscript</div>
+
+</div>
+</body>
+</html>
