@@ -147,6 +147,10 @@
 
     <!-- Overview -->
     <h2 id="overview">Overview</h2>
+    <div class="info-box" style="border-left-color:#e05252;margin-bottom:16px;">
+        <div class="info-title" style="color:#e05252;">🔒 Diamond Cartel Exclusive</div>
+        <p>This script is exclusively for members of <strong style="color:#fff">Diamond Cartel</strong>. The script verifies your faction membership via the Torn API on every load — if you leave the faction the script will no longer function. Developed by <strong style="color:#fff">OfficialSVK</strong>.</p>
+    </div>
     <p>War Intel is a userscript that automatically detects your active Torn ranked war, pulls enemy faction member data, and enriches it with battle stat and Fair Fight predictions from FFScouter — displayed in a live dashboard that refreshes automatically.</p>
     <ul>
         <li><strong>Desktop</strong> — Floating, resizable panel with sortable columns, filter views, attack buttons, hospital timers, and a formatted HTML export for Torn mail. Installed via Tampermonkey.</li>
@@ -258,6 +262,7 @@
     <ul>
         <li><strong>⬇ Export</strong> — Downloads a TXT file containing HTML markup. Open it, select all, copy, and paste into Torn mail or a forum post. The report groups members into threat tiers with your faction vs enemy header and clickable profile links.</li>
         <li><strong>🔍 Debug mode</strong> — Click the magnifying glass icon and open Settings to see raw API responses — useful if something isn't loading correctly.</li>
+        <li><strong>✕ Hide</strong> — Click ✕ to hide the panel to a small ⚔ WAR side tab. The state persists between page changes so the panel stays hidden until you click the tab to restore it.</li>
     </ul>
 
     <!-- Mobile Features -->
@@ -278,6 +283,7 @@
     </div>
     <ul>
         <li><strong>⚔ Stats</strong> — Default view. Members grouped into colour-coded threat tiers by estimated battle stats. Each card shows name, ID, level, estimated stats, Fair Fight score (colour coded), stat distribution, current status, and a hospital/jail countdown timer where applicable. Tap any tier header to collapse or expand that group.</li>
+        <li><strong>✈ Fly button</strong> — Tap the ✈ Fly button in the header to go directly to the Torn Travel Agency page.</li>
         <li><strong>⏱ Timer</strong> — Sorts members by availability. Four sections, each collapsible:</li>
     </ul>
 
@@ -364,10 +370,13 @@
     <h3>Export does nothing on iOS</h3>
     <p>iOS blocks file downloads from in-app browsers. The export copies the report to your clipboard instead — a green toast confirms this. Open Torn mail and paste.</p>
 
+    <h3>"Access Denied" screen appears</h3>
+    <p>The script verifies your Torn API key belongs to an active Diamond Cartel member on every load. If you see the 🔒 Access Denied screen it means the key you entered is not associated with a Diamond Cartel member. Make sure you are using your own key and that you are still in the faction.</p>
+
     <h3>General errors or broken behaviour</h3>
     <p>Re-install by uninstalling the current script and reinstalling from Greasy Fork using the links at the top of this guide.</p>
 
-    <div class="footer">⚔ War Intel — Setup &amp; Feature Guide &nbsp;·&nbsp; Torn City Userscript</div>
+    <div class="footer">⚔ War Intel — Setup &amp; Feature Guide &nbsp;·&nbsp; OfficialSVK's Torn City Userscript<br><span style="font-size:11px;color:#333;">© 2026 OfficialSVK — Diamond Cartel. All rights reserved. Exclusively for Diamond Cartel members.</span></div>
 
 </div>
 </body>
