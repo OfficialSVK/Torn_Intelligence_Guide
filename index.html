@@ -3,381 +3,1165 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>⚔ War Intel — Setup Guide</title>
+<title>War Intel — Field Manual</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;800;900&family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
-    :root {
-        --red:    #c0392b;
-        --purple: #7a7aff;
-        --dark:   #0f0f12;
-        --dark2:  #13131a;
-        --dark3:  #1a1a22;
-        --dark4:  #1e1e2e;
-        --border: #2d2d4a;
-        --text:   #c9c9d4;
-        --muted:  #888888;
-        --white:  #ffffff;
-        --green:  #4caf50;
-        --orange: #ff9800;
-        --blue:   #7a9aff;
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { background: var(--dark); color: var(--text); font-family: -apple-system, 'Segoe UI', Arial, sans-serif; font-size: 15px; line-height: 1.7; }
-    .page { max-width: 900px; margin: 0 auto; padding: 40px 24px 80px; }
+:root {
+    --bg:        #0a0a0f;
+    --surface:   #12121a;
+    --surface-2: #1a1a24;
+    --line:      #2a2a3a;
+    --line-soft: #1f1f2e;
+    --text:      #e8e6df;
+    --text-dim:  #8a8a99;
+    --text-mute: #555566;
+    --red:       #e05252;
+    --red-dim:   #a63c3c;
+    --purple:    #7a7aff;
+    --purple-dim:#4848a3;
+    --yellow:    #ffc107;
+    --green:     #4caf50;
+    --orange:    #ff9800;
+    --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', monospace;
+    --font-disp: 'Archivo', 'Helvetica Neue', sans-serif;
+}
 
-    /* ── Hero ── */
-    .hero { padding: 48px 0 40px; border-bottom: 1px solid var(--border); margin-bottom: 40px; }
-    .hero h1 { font-size: 42px; font-weight: 800; letter-spacing: .04em; line-height: 1.1; margin-bottom: 10px; }
-    .hero h1 .red    { color: var(--red); }
-    .hero h1 .purple { color: var(--purple); }
-    .hero .subtitle  { color: var(--muted); font-size: 16px; margin-top: 6px; }
-    .badges { display: flex; gap: 10px; margin-top: 18px; flex-wrap: wrap; }
-    .badge { font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 20px; letter-spacing: .06em; text-transform: uppercase; }
-    .badge-red    { background: #2a1010; color: var(--red);    border: 1px solid #4a1a1a; }
-    .badge-purple { background: #1a1a2e; color: var(--purple); border: 1px solid #2d2d4a; }
-    .badge-green  { background: #1a2a1a; color: var(--green);  border: 1px solid #2a3a2a; }
-    .dl-buttons { display: flex; gap: 12px; margin-top: 24px; flex-wrap: wrap; }
-    .dl-btn { display: inline-block; padding: 10px 20px; border-radius: 6px; font-size: 13px; font-weight: 700; letter-spacing: .04em; text-decoration: none; }
-    .dl-btn:hover { opacity: .8; text-decoration: none; }
-    .dl-btn-red    { background: var(--red);    color: var(--white); }
-    .dl-btn-purple { background: var(--purple); color: var(--white); }
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
-    /* ── TOC ── */
-    .toc { background: var(--dark3); border: 1px solid var(--border); border-radius: 8px; padding: 20px 24px; margin-bottom: 40px; }
-    .toc h4 { color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: .1em; margin-bottom: 12px; }
-    .toc ol { padding-left: 18px; }
-    .toc li { margin-bottom: 6px; font-size: 14px; }
-    .toc a { color: var(--text); } .toc a:hover { color: var(--purple); }
+html { scroll-behavior: smooth; }
 
-    /* ── Headings ── */
-    h2 { font-size: 22px; font-weight: 700; color: var(--red); margin: 52px 0 18px; padding-bottom: 10px; border-bottom: 2px solid var(--border); }
-    h3 { font-size: 16px; font-weight: 700; color: var(--purple); margin: 28px 0 10px; }
-    p  { margin-bottom: 12px; color: var(--text); }
-    a  { color: var(--purple); text-decoration: none; } a:hover { text-decoration: underline; color: var(--white); }
-    code { background: #1a1a2e; color: var(--purple); padding: 2px 7px; border-radius: 4px; font-family: 'Courier New', monospace; font-size: 13px; }
-    ul { padding-left: 20px; margin: 10px 0; }
-    ul li { margin-bottom: 7px; color: #aaa; font-size: 14px; line-height: 1.6; }
-    ul li strong { color: var(--white); }
+body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-mono);
+    font-size: 14px;
+    line-height: 1.7;
+    font-weight: 400;
+    min-height: 100vh;
+    overflow-x: hidden;
+    background-image:
+        linear-gradient(rgba(122, 122, 255, 0.015) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(122, 122, 255, 0.015) 1px, transparent 1px);
+    background-size: 40px 40px;
+    background-position: -1px -1px;
+}
 
-    /* ── Boxes ── */
-    .info-box { background: var(--dark3); border-left: 4px solid var(--purple); border-radius: 0 6px 6px 0; padding: 16px 18px; margin: 16px 0; font-size: 14px; }
-    .info-box .info-title { font-weight: 700; color: var(--white); margin-bottom: 8px; }
-    .info-box p { color: #aaa; margin-bottom: 6px; } .info-box p:last-child { margin-bottom: 0; }
-    .info-box .label { color: var(--muted); font-weight: 600; }
-    .warn-box { background: #1a100a; border-left: 4px solid var(--orange); border-radius: 0 6px 6px 0; padding: 12px 16px; margin: 14px 0; font-size: 13px; color: #ccaa88; }
-    .warn-box strong { color: var(--orange); }
+/* Scanline overlay */
+body::before {
+    content: '';
+    position: fixed; inset: 0;
+    pointer-events: none;
+    z-index: 100;
+    background: repeating-linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0) 0px,
+        rgba(0, 0, 0, 0) 2px,
+        rgba(0, 0, 0, 0.08) 2px,
+        rgba(0, 0, 0, 0.08) 3px
+    );
+    opacity: 0.4;
+}
 
-    /* ── Steps ── */
-    .steps { display: flex; flex-direction: column; gap: 2px; margin: 16px 0; }
-    .step { display: flex; align-items: flex-start; background: var(--dark2); border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
-    .step-num { background: var(--red); color: var(--white); font-weight: 800; font-size: 16px; min-width: 48px; display: flex; align-items: center; justify-content: center; align-self: stretch; flex-shrink: 0; }
-    .step-body { padding: 14px 16px; flex: 1; }
-    .step-title { font-weight: 700; color: var(--white); margin-bottom: 4px; font-size: 14px; }
-    .step-desc { color: #aaa; font-size: 13px; line-height: 1.6; margin: 0; }
+/* Vignette */
+body::after {
+    content: '';
+    position: fixed; inset: 0;
+    pointer-events: none;
+    z-index: 99;
+    background: radial-gradient(ellipse at center, transparent 40%, rgba(0, 0, 0, 0.5) 100%);
+}
 
-    /* ── Tables ── */
-    .data-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 13px; }
-    .data-table th { background: var(--dark3); color: var(--purple); font-size: 11px; text-transform: uppercase; letter-spacing: .1em; padding: 10px 14px; text-align: left; border: 1px solid var(--border); }
-    .data-table td { padding: 9px 14px; border: 1px solid #1e1e28; vertical-align: top; color: #aaa; }
-    .data-table tr:nth-child(odd) td  { background: var(--dark); }
-    .data-table tr:nth-child(even) td { background: var(--dark2); }
-    .data-table .yes  { color: var(--green); font-weight: 700; }
-    .data-table .name { color: var(--white); font-weight: 600; }
+.wrap {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 60px 32px 120px;
+    position: relative;
+    z-index: 1;
+}
 
-    /* ── Feature grid ── */
-    .feature-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 16px 0; }
-    @media (max-width: 600px) { .feature-grid { grid-template-columns: 1fr; } }
-    .feature-card { background: var(--dark2); border: 1px solid var(--border); border-radius: 6px; padding: 14px 16px; }
-    .fc-icon  { font-size: 18px; margin-bottom: 6px; }
-    .fc-title { font-weight: 700; color: var(--white); font-size: 13px; margin-bottom: 4px; }
-    .fc-desc  { font-size: 12px; color: #777; line-height: 1.5; }
+/* ─────────────────────────────────────────────── */
+/*  HEADER                                         */
+/* ─────────────────────────────────────────────── */
+header {
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 40px;
+    margin-bottom: 56px;
+    animation: reveal 0.6s ease-out;
+}
 
-    /* ── Tab demo ── */
-    .tab-demo { display: flex; gap: 6px; margin: 12px 0; flex-wrap: wrap; }
-    .tab { padding: 5px 14px; border-radius: 4px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; border: 1px solid var(--border); background: var(--dark3); color: #555; }
-    .tab.active { background: var(--dark4); color: var(--purple); border-color: #7a7aff55; }
+.classification {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: var(--text-mute);
+    text-transform: uppercase;
+    margin-bottom: 28px;
+}
 
-    /* ── Tier dots ── */
-    .dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; vertical-align: middle; }
+.classification .left {
+    color: var(--red);
+    font-weight: 700;
+}
 
-    /* ── Timer sections ── */
-    .timer-sections { display: flex; flex-direction: column; gap: 6px; margin: 12px 0; }
-    .timer-section { display: flex; align-items: center; gap: 10px; padding: 8px 12px; background: var(--dark2); border: 1px solid var(--border); border-radius: 6px; font-size: 13px; }
-    .timer-section .ts-icon  { font-size: 16px; flex-shrink: 0; }
-    .timer-section .ts-label { font-weight: 700; }
-    .timer-section .ts-desc  { color: #666; font-size: 12px; margin-left: auto; }
+h1 {
+    font-family: var(--font-disp);
+    font-weight: 900;
+    font-size: clamp(48px, 8vw, 88px);
+    line-height: 0.92;
+    letter-spacing: -0.04em;
+    color: var(--text);
+    margin-bottom: 16px;
+}
 
-    .version { display: inline-block; background: #1a1a2e; border: 1px solid var(--border); color: var(--muted); font-size: 10px; padding: 2px 8px; border-radius: 10px; margin-left: 8px; vertical-align: middle; }
-    hr { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
-    .footer { margin-top: 60px; padding-top: 20px; border-top: 1px solid var(--border); color: var(--muted); font-size: 12px; text-align: center; }
+h1 .sub {
+    display: block;
+    color: var(--red);
+    font-size: 0.4em;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    margin-top: 8px;
+}
+
+.subtitle {
+    color: var(--text-dim);
+    font-size: 13px;
+    max-width: 560px;
+    line-height: 1.6;
+    margin-top: 20px;
+}
+
+.meta {
+    display: flex;
+    gap: 32px;
+    margin-top: 32px;
+    font-size: 11px;
+    color: var(--text-mute);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    flex-wrap: wrap;
+}
+
+.meta span strong {
+    color: var(--purple);
+    font-weight: 500;
+}
+
+/* ─────────────────────────────────────────────── */
+/*  TOC                                            */
+/* ─────────────────────────────────────────────── */
+nav.toc {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    padding: 24px 28px;
+    margin-bottom: 64px;
+    animation: reveal 0.6s ease-out 0.1s backwards;
+}
+
+nav.toc h4 {
+    font-family: var(--font-disp);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 16px;
+}
+
+nav.toc ol {
+    list-style: none;
+    counter-reset: toc;
+}
+
+nav.toc li {
+    counter-increment: toc;
+    padding: 6px 0;
+    border-bottom: 1px dashed var(--line-soft);
+}
+
+nav.toc li:last-child { border-bottom: none; }
+
+nav.toc a {
+    color: var(--text);
+    text-decoration: none;
+    font-size: 13px;
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    transition: color 0.2s;
+}
+
+nav.toc a::before {
+    content: "§" counter(toc, decimal-leading-zero);
+    color: var(--text-mute);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    flex-shrink: 0;
+}
+
+nav.toc a:hover { color: var(--purple); }
+
+/* ─────────────────────────────────────────────── */
+/*  SECTIONS                                       */
+/* ─────────────────────────────────────────────── */
+section {
+    margin-bottom: 88px;
+    animation: reveal 0.6s ease-out backwards;
+}
+
+section:nth-of-type(1) { animation-delay: 0.15s; }
+section:nth-of-type(2) { animation-delay: 0.2s; }
+section:nth-of-type(3) { animation-delay: 0.25s; }
+section:nth-of-type(4) { animation-delay: 0.3s; }
+section:nth-of-type(5) { animation-delay: 0.35s; }
+section:nth-of-type(6) { animation-delay: 0.4s; }
+section:nth-of-type(7) { animation-delay: 0.45s; }
+
+section h2 {
+    font-family: var(--font-disp);
+    font-weight: 800;
+    font-size: 36px;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+}
+
+section h2 .section-num {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.2em;
+    color: var(--red);
+}
+
+section .section-meta {
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-mute);
+    margin-bottom: 28px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--line-soft);
+}
+
+section h3 {
+    font-family: var(--font-disp);
+    font-weight: 600;
+    font-size: 20px;
+    color: var(--purple);
+    margin-top: 40px;
+    margin-bottom: 12px;
+    letter-spacing: -0.01em;
+}
+
+section h4 {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: 13px;
+    color: var(--text);
+    margin-top: 24px;
+    margin-bottom: 8px;
+    letter-spacing: 0.02em;
+}
+
+section p {
+    color: var(--text);
+    margin-bottom: 16px;
+    max-width: 72ch;
+}
+
+section p.lead {
+    font-size: 15px;
+    color: var(--text-dim);
+    max-width: 64ch;
+    line-height: 1.7;
+}
+
+em { color: var(--purple); font-style: normal; }
+strong { color: var(--text); font-weight: 700; }
+
+a.link {
+    color: var(--purple);
+    text-decoration: none;
+    border-bottom: 1px solid var(--purple-dim);
+    transition: all 0.2s;
+}
+a.link:hover {
+    color: var(--text);
+    border-bottom-color: var(--text);
+}
+
+/* Inline code */
+code {
+    font-family: var(--font-mono);
+    font-size: 0.9em;
+    background: var(--surface-2);
+    color: var(--yellow);
+    padding: 2px 6px;
+    border: 1px solid var(--line);
+}
+
+/* Step sequence */
+ol.steps {
+    list-style: none;
+    counter-reset: step;
+    margin: 24px 0;
+}
+
+ol.steps > li {
+    counter-increment: step;
+    position: relative;
+    padding-left: 64px;
+    padding-bottom: 28px;
+    margin-bottom: 24px;
+    border-bottom: 1px dashed var(--line-soft);
+}
+
+ol.steps > li:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+
+ol.steps > li::before {
+    content: counter(step, decimal-leading-zero);
+    position: absolute;
+    left: 0; top: 0;
+    width: 44px;
+    font-family: var(--font-disp);
+    font-weight: 900;
+    font-size: 28px;
+    color: var(--red);
+    line-height: 1;
+    letter-spacing: -0.05em;
+}
+
+ol.steps > li::after {
+    content: '';
+    position: absolute;
+    left: 8px; top: 36px;
+    bottom: 20px;
+    width: 1px;
+    background: var(--line-soft);
+}
+
+ol.steps > li:last-child::after { display: none; }
+
+ol.steps li strong.step-title {
+    display: block;
+    font-family: var(--font-disp);
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 8px;
+    letter-spacing: -0.01em;
+}
+
+/* Sub-lists inside steps */
+ol.steps ul {
+    list-style: none;
+    margin: 12px 0 0 0;
+}
+
+ol.steps ul li {
+    padding: 4px 0 4px 20px;
+    position: relative;
+    color: var(--text-dim);
+    font-size: 13px;
+}
+
+ol.steps ul li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: var(--red-dim);
+}
+
+/* Callouts / notes */
+.callout {
+    background: var(--surface);
+    border-left: 3px solid var(--purple);
+    padding: 18px 24px;
+    margin: 24px 0;
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+.callout.warn   { border-left-color: var(--orange); }
+.callout.danger { border-left-color: var(--red); }
+.callout.ok     { border-left-color: var(--green); }
+
+.callout .label {
+    font-family: var(--font-disp);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--purple);
+    margin-bottom: 6px;
+    display: block;
+}
+.callout.warn   .label { color: var(--orange); }
+.callout.danger .label { color: var(--red); }
+.callout.ok     .label { color: var(--green); }
+
+/* Terminal-style code block */
+pre.terminal {
+    background: #05050a;
+    border: 1px solid var(--line);
+    padding: 18px 22px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    line-height: 1.7;
+    color: var(--green);
+    overflow-x: auto;
+    margin: 16px 0;
+    position: relative;
+}
+
+pre.terminal::before {
+    content: '◉  ◉  ◉';
+    letter-spacing: 8px;
+    color: var(--line);
+    font-size: 8px;
+    display: block;
+    margin-bottom: 12px;
+}
+
+pre.terminal .prompt { color: var(--purple); }
+pre.terminal .dim    { color: var(--text-mute); }
+
+/* Status dot references */
+.dot {
+    display: inline-block;
+    width: 9px; height: 9px;
+    border-radius: 50%;
+    margin-right: 6px;
+    vertical-align: 1px;
+    box-shadow: 0 0 4px currentColor;
+}
+.dot.green   { background: var(--green);  color: var(--green); }
+.dot.orange  { background: var(--orange); color: var(--orange); }
+.dot.red     { background: var(--red);    color: var(--red); }
+.dot.grey    { background: #555; color: #555; box-shadow: none; }
+
+/* Trouble table */
+.trouble {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    margin: 24px 0;
+}
+
+.trouble .row {
+    background: var(--bg);
+    padding: 18px 22px;
+}
+
+.trouble .symptom {
+    font-family: var(--font-disp);
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--red);
+    margin-bottom: 4px;
+    letter-spacing: -0.01em;
+}
+
+.trouble .cause {
+    color: var(--text-dim);
+    font-size: 12px;
+    margin-bottom: 10px;
+    font-style: italic;
+}
+
+.trouble .fix {
+    color: var(--text);
+    font-size: 13px;
+}
+
+/* Platform tabs — no JS, just section headers with a visual divider */
+.platform-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-top: 32px;
+    margin-bottom: 12px;
+    padding: 10px 16px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+}
+
+.platform-header .tag {
+    font-family: var(--font-disp);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--bg);
+    background: var(--red);
+    padding: 3px 10px;
+}
+
+.platform-header .tag.purple { background: var(--purple); }
+
+.platform-header h4 {
+    margin: 0;
+    font-size: 15px;
+    color: var(--text);
+}
+
+/* Footer */
+footer {
+    margin-top: 120px;
+    padding-top: 32px;
+    border-top: 1px solid var(--line);
+    color: var(--text-mute);
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+footer .diamond {
+    color: var(--red);
+    font-family: var(--font-disp);
+    font-weight: 900;
+    font-size: 14px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+/* Mobile adjustments */
+@media (max-width: 620px) {
+    .wrap { padding: 40px 20px 80px; }
+    h1 { font-size: 48px; }
+    section h2 { font-size: 26px; gap: 10px; }
+    section h3 { font-size: 17px; }
+    .classification { font-size: 9px; }
+    .meta { gap: 16px; font-size: 10px; }
+    ol.steps > li { padding-left: 48px; }
+    ol.steps > li::before { font-size: 22px; }
+    pre.terminal { font-size: 11px; padding: 14px 16px; }
+}
+
+/* Animation */
+@keyframes reveal {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Selection */
+::selection { background: var(--red); color: var(--bg); }
+
+/* Text decoration for in-prose dots indicators */
+.kbd {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    background: var(--surface-2);
+    border: 1px solid var(--line);
+    padding: 2px 8px;
+    color: var(--text);
+}
 </style>
 </head>
 <body>
-<div class="page">
 
-    <!-- Hero -->
-    <div class="hero">
-        <h1><span class="red">⚔ WAR </span><span class="purple">INTEL</span></h1>
-        <div class="subtitle">Setup &amp; Feature Guide <span class="version">Latest</span></div>
-        <div class="badges">
-            <span class="badge badge-red">Desktop</span>
-            <span class="badge badge-purple">TornPDA Mobile</span>
-            <span class="badge badge-green">Free</span>
+<div class="wrap">
+
+<!-- ─────────────────────────────────────────────── -->
+<!--  HEADER                                         -->
+<!-- ─────────────────────────────────────────────── -->
+<header>
+    <div class="classification">
+        <span class="left">⚔ RESTRICTED — DIAMOND CARTEL INTERNAL</span>
+        <span>DOC/WI-03 · REV 1.0</span>
+    </div>
+
+    <h1>
+        WAR INTEL
+        <span class="sub">Field Manual — Installation &amp; Operation</span>
+    </h1>
+
+    <p class="subtitle">
+        A faction-wide enemy tracking tool covering player stats, fair-fight predictions
+        and real-time flight monitoring. This guide walks you through installation on
+        desktop and TornPDA, and how to read the dashboard once it's running.
+    </p>
+
+    <div class="meta">
+        <span>Audience: <strong>Diamond Cartel members</strong></span>
+        <span>Reading time: <strong>~6 minutes</strong></span>
+        <span>Setup time: <strong>~3 minutes</strong></span>
+    </div>
+</header>
+
+<!-- ─────────────────────────────────────────────── -->
+<!--  TOC                                            -->
+<!-- ─────────────────────────────────────────────── -->
+<nav class="toc">
+    <h4>Contents</h4>
+    <ol>
+        <li><a href="#what">What is War Intel</a></li>
+        <li><a href="#prereq">Before you install</a></li>
+        <li><a href="#install-desktop">Installing on desktop</a></li>
+        <li><a href="#install-pda">Installing on TornPDA (mobile)</a></li>
+        <li><a href="#first-run">First run &amp; settings</a></li>
+        <li><a href="#using">Reading the dashboard</a></li>
+        <li><a href="#trouble">Things to check if it's not working</a></li>
+    </ol>
+</nav>
+
+<!-- ─────────────────────────────────────────────── -->
+<!--  §01 WHAT                                       -->
+<!-- ─────────────────────────────────────────────── -->
+<section id="what">
+    <h2><span class="section-num">§01</span> What is War Intel</h2>
+    <div class="section-meta">Overview · What you'll see when it's running</div>
+
+    <p class="lead">
+        War Intel is a small overlay that appears on every Torn page during ranked wars.
+        It shows the enemy faction's members, their stats, and what they're currently
+        doing — hospital timers, jail timers, and most importantly, <em>flight
+        activity</em>.
+    </p>
+
+    <p>
+        During a war, knowing when an enemy is in transit is tactical gold.
+        War Intel tracks every flight your enemies take — when they left, where they
+        went, and when they're landing. It does this by combining observations from
+        every member of our faction who has the tool installed, pooling that data on
+        a shared backend so even if your browser is closed, the rest of the faction's
+        observations are still being collected.
+    </p>
+
+    <h3>What you can expect</h3>
+
+    <p>
+        Once installed, you'll see a panel on the right side of your screen
+        (desktop) or as a sliding card view (mobile) whenever there's an active
+        ranked war. Between wars, it stays dormant. You'll see three views you can
+        switch between:
+    </p>
+
+    <ul style="list-style:none; margin: 12px 0 24px 0;">
+        <li style="padding: 8px 0; border-bottom: 1px dashed var(--line-soft);">
+            <strong style="color: var(--red);">By Stats</strong> —
+            Enemies sorted by estimated battle stats, highest threats first.
+        </li>
+        <li style="padding: 8px 0; border-bottom: 1px dashed var(--line-soft);">
+            <strong style="color: var(--red);">By Timer</strong> —
+            Enemies in hospital or jail, sorted by who's getting out first.
+        </li>
+        <li style="padding: 8px 0;">
+            <strong style="color: var(--red);">By Flight</strong> —
+            Who's flying right now, who's abroad, who just landed.
+        </li>
+    </ul>
+
+    <div class="callout">
+        <span class="label">Note — privacy</span>
+        War Intel is locked to Diamond Cartel members only. If someone outside the
+        faction installs it, they'll see an "Access Denied" screen instead of
+        any data. Your API key is hashed (never stored raw) and only used to
+        verify your faction membership.
+    </div>
+</section>
+
+<!-- ─────────────────────────────────────────────── -->
+<!--  §02 PREREQ                                     -->
+<!-- ─────────────────────────────────────────────── -->
+<section id="prereq">
+    <h2><span class="section-num">§02</span> Before you install</h2>
+    <div class="section-meta">Required accounts &amp; keys</div>
+
+    <p>
+        You need <strong>one thing</strong>: a Torn API key. No signup, no account
+        on any other service. Here's how to get one if you don't already have it:
+    </p>
+
+    <ol class="steps">
+        <li>
+            <strong class="step-title">Open your Torn API preferences</strong>
+            <p>
+                Go to <a class="link" href="https://www.torn.com/preferences.php#tab=api" target="_blank">
+                torn.com/preferences.php#tab=api</a>. You may be asked to log in.
+            </p>
+        </li>
+        <li>
+            <strong class="step-title">Create a new key</strong>
+            <p>
+                Under "Create a key", pick <strong>Limited Access</strong> as the
+                access level. Give it a comment like <code>WarIntel</code> so you
+                recognise it later. Click "Create".
+            </p>
+            <div class="callout warn">
+                <span class="label">Important</span>
+                Don't use Full Access — it exposes far more data than the tool needs.
+                Limited Access is enough. If you already have a Limited key for
+                something else, you can reuse it.
+            </div>
+        </li>
+        <li>
+            <strong class="step-title">Copy the 16-character key</strong>
+            <p>
+                You'll paste this into War Intel's settings the first time you
+                run it. Keep the preferences tab open for now.
+            </p>
+        </li>
+    </ol>
+</section>
+
+<!-- ─────────────────────────────────────────────── -->
+<!--  §03 DESKTOP INSTALL                            -->
+<!-- ─────────────────────────────────────────────── -->
+<section id="install-desktop">
+    <h2><span class="section-num">§03</span> Installing on desktop</h2>
+    <div class="section-meta">Chrome, Firefox, Edge, Safari · via Tampermonkey</div>
+
+    <p>
+        On desktop, War Intel runs as a userscript. Userscripts are small
+        JavaScript files that run inside specific websites — in our case, only
+        on torn.com pages. To run them, you need a browser extension called
+        <strong>Tampermonkey</strong>. It's free, very widely used, and safe.
+    </p>
+
+    <ol class="steps">
+        <li>
+            <strong class="step-title">Install Tampermonkey</strong>
+            <p>Pick your browser:</p>
+            <ul>
+                <li><a class="link" href="https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo" target="_blank">Chrome / Brave / Arc</a></li>
+                <li><a class="link" href="https://addons.mozilla.org/en-US/firefox/addon/tampermonkey/" target="_blank">Firefox</a></li>
+                <li><a class="link" href="https://microsoftedge.microsoft.com/addons/detail/tampermonkey/iikmkjmpaadaobahmlepeloendndfphd" target="_blank">Edge</a></li>
+                <li><a class="link" href="https://apps.apple.com/app/tampermonkey/id1482490089" target="_blank">Safari (macOS / iOS)</a></li>
+            </ul>
+            <p>Click "Add to Browser" or "Install". You'll see a new Tampermonkey icon near your address bar.</p>
+        </li>
+
+        <li>
+            <strong class="step-title">Open the War Intel script link</strong>
+            <p>
+                Open the installation link provided in the Diamond Cartel Discord
+                (it'll be a <code>.user.js</code> URL). Tampermonkey will
+                detect it automatically and open an installation prompt.
+            </p>
+        </li>
+
+        <li>
+            <strong class="step-title">Click "Install"</strong>
+            <p>
+                You'll see a preview screen showing the script's name, author,
+                version, and what permissions it needs. Click the big green
+                <strong>Install</strong> button at the top.
+            </p>
+            <div class="callout">
+                <span class="label">What permissions you're granting</span>
+                The script needs to talk to three servers: <code>api.torn.com</code>
+                (for your faction data), <code>ffscouter.com</code> (for battle
+                stat predictions), and the Diamond Cartel backend on Railway
+                (for shared flight coverage). Nothing else.
+            </div>
+        </li>
+
+        <li>
+            <strong class="step-title">Refresh Torn</strong>
+            <p>
+                Go to <a class="link" href="https://www.torn.com" target="_blank">torn.com</a>
+                and refresh the page. The War Intel panel appears on the right side
+                of the screen. If there's no active war, you'll see a note saying so
+                — that's correct. Jump to <a class="link" href="#first-run">§05</a> to
+                enter your API key.
+            </p>
+        </li>
+    </ol>
+</section>
+
+<!-- ─────────────────────────────────────────────── -->
+<!--  §04 PDA INSTALL                                -->
+<!-- ─────────────────────────────────────────────── -->
+<section id="install-pda">
+    <h2><span class="section-num">§04</span> Installing on TornPDA (mobile)</h2>
+    <div class="section-meta">iOS and Android · via TornPDA's built-in script manager</div>
+
+    <p>
+        If you play Torn on mobile through the
+        <a class="link" href="https://tornpda.com/" target="_blank">TornPDA</a> app,
+        you don't need Tampermonkey — TornPDA has its own userscript manager built in.
+    </p>
+
+    <ol class="steps">
+        <li>
+            <strong class="step-title">Install TornPDA if you haven't yet</strong>
+            <p>
+                Available on the
+                <a class="link" href="https://apps.apple.com/us/app/torn-pda/id1510138514" target="_blank">App Store</a>
+                and
+                <a class="link" href="https://play.google.com/store/apps/details?id=com.manuito.tornpda" target="_blank">Play Store</a>.
+                Log in with your Torn credentials when prompted.
+            </p>
+        </li>
+
+        <li>
+            <strong class="step-title">Open TornPDA's settings</strong>
+            <p>
+                Tap the <strong>More</strong> tab at the bottom (three dots or
+                hamburger icon depending on version), then tap
+                <strong>Userscripts</strong>.
+            </p>
+        </li>
+
+        <li>
+            <strong class="step-title">Add a new script</strong>
+            <p>
+                Tap the <strong>+</strong> button (or "Add script" / "New" depending
+                on version). You'll have two options:
+            </p>
+            <ul>
+                <li><strong>Add from URL</strong> — paste the PDA install link from Discord</li>
+                <li><strong>Add manually</strong> — paste the full script contents into the editor</li>
+            </ul>
+            <p>Either works. The URL method keeps you on the latest version automatically.</p>
+        </li>
+
+        <li>
+            <strong class="step-title">Enable and save</strong>
+            <p>
+                Make sure the toggle is <strong>ON</strong> and tap Save. The script
+                activates the next time you load any Torn page inside the app.
+            </p>
+        </li>
+
+        <li>
+            <strong class="step-title">Reload Torn inside TornPDA</strong>
+            <p>
+                Go back to the main Torn view and pull down to refresh. The War Intel
+                panel appears. Enter your API key in settings — see
+                <a class="link" href="#first-run">§05</a>.
+            </p>
+        </li>
+    </ol>
+
+    <div class="callout warn">
+        <span class="label">Separate script, same backend</span>
+        The desktop and TornPDA versions are two different <code>.user.js</code>
+        files, optimised for their respective environments. They share the same
+        Diamond Cartel backend, so flight history you observe on desktop is
+        visible on mobile and vice-versa.
+    </div>
+</section>
+
+<!-- ─────────────────────────────────────────────── -->
+<!--  §05 FIRST RUN                                  -->
+<!-- ─────────────────────────────────────────────── -->
+<section id="first-run">
+    <h2><span class="section-num">§05</span> First run &amp; settings</h2>
+    <div class="section-meta">Entering your API key · One-time setup</div>
+
+    <p>
+        The first time War Intel runs, it'll prompt you to enter your API key
+        because it needs to verify you're a Diamond Cartel member before showing
+        any data.
+    </p>
+
+    <ol class="steps">
+        <li>
+            <strong class="step-title">Open the Settings panel</strong>
+            <p>
+                Click <strong><span class="kbd">⚙ Settings</span></strong>
+                in the War Intel title bar. A panel expands with two input fields.
+            </p>
+        </li>
+
+        <li>
+            <strong class="step-title">Paste your Torn API key</strong>
+            <p>
+                Into the <strong>Torn API Key</strong> field. It should be exactly
+                16 characters. If you pasted extra whitespace or a partial key,
+                you'll see an alert.
+            </p>
+        </li>
+
+        <li>
+            <strong class="step-title">FFScouter key — optional</strong>
+            <p>
+                The <strong>FFScouter Key</strong> field is optional now that
+                the shared backend handles this for you. You can leave it blank.
+                If you already have one and paste it here, tick the data-policy
+                checkbox to confirm you've read
+                <a class="link" href="https://ffscouter.com/" target="_blank">FFScouter's data policy</a>.
+            </p>
+        </li>
+
+        <li>
+            <strong class="step-title">Click "Save &amp; Fetch"</strong>
+            <p>
+                War Intel stores your key locally (never sent anywhere except for
+                auth), contacts the backend, verifies faction membership, and
+                loads the enemy faction if there's an active war.
+            </p>
+        </li>
+    </ol>
+
+    <div class="callout ok">
+        <span class="label">You're done</span>
+        Your settings are remembered. You won't need to touch this panel again.
+        The <span class="dot green"></span>green dot in the title bar is your confirmation that
+        the backend handshake succeeded — more on what the dot means in the
+        next section.
+    </div>
+</section>
+
+<!-- ─────────────────────────────────────────────── -->
+<!--  §06 USING                                      -->
+<!-- ─────────────────────────────────────────────── -->
+<section id="using">
+    <h2><span class="section-num">§06</span> Reading the dashboard</h2>
+    <div class="section-meta">The three views · The status dot · Flight history</div>
+
+    <h3>The status dot</h3>
+
+    <p>
+        Next to the "WAR INTEL" logo in the title bar, there's a small coloured
+        dot. It tells you at a glance what mode the tool is operating in:
+    </p>
+
+    <ul style="list-style:none; margin: 16px 0 32px 0;">
+        <li style="padding: 8px 0;">
+            <span class="dot green"></span><strong>Green</strong> —
+            Connected to the shared Diamond Cartel backend. You're seeing
+            faction-wide pooled observations. This is the normal state.
+        </li>
+        <li style="padding: 8px 0;">
+            <span class="dot orange"></span><strong>Orange</strong> —
+            Backend is unreachable, the tool is falling back to direct Torn API
+            polling. Still works, just without shared coverage. Usually self-heals
+            within a minute or two. Hover/tap the dot to see the error reason.
+        </li>
+        <li style="padding: 8px 0;">
+            <span class="dot red"></span><strong>Red</strong> —
+            Both paths have failed. Something is genuinely wrong — check your
+            API key, check your internet, or report it in Discord.
+        </li>
+        <li style="padding: 8px 0;">
+            <span class="dot grey"></span><strong>Grey</strong> —
+            Initial connection, usually only for a few seconds on first load.
+        </li>
+    </ul>
+
+    <h3>Switching between views</h3>
+
+    <p>
+        Three tabs sit under the war header:
+        <span class="kbd">⚔ By Stats</span>,
+        <span class="kbd">⏱ By Timer</span>,
+        <span class="kbd">✈ By Flight</span>.
+        Tap or click any of them to switch.
+    </p>
+
+    <h4>⚔ By Stats</h4>
+    <p>
+        Every enemy sorted by FFScouter's battle-stat estimate (highest first by
+        default). Click a column header to re-sort. The <strong>FF</strong>
+        column shows the fair-fight multiplier — green is easy, yellow is
+        even, red is dangerous. The <strong>Dist.</strong> column shows the
+        distribution confidence from FFScouter.
+    </p>
+
+    <h4>⏱ By Timer</h4>
+    <p>
+        Enemies grouped by status. "In Hospital / Jail" sorted by who's getting
+        out soonest. "Out Soon" are ones whose timer just expired but the
+        backend hasn't re-polled to confirm their status. "Available Now" are
+        okay and attackable.
+    </p>
+
+    <h4>✈ By Flight</h4>
+    <p>
+        Three sections: <strong>Currently Flying</strong> (in transit, with live
+        landing countdowns), <strong>Abroad</strong> (currently in another
+        country), <strong>Recently Landed</strong> (landed in the last 30
+        minutes). The route column shows origin and destination — for
+        example <code>TRN → JAP</code> for an outbound flight to Japan, or
+        <code>SWI → TRN</code> for a return flight.
+    </p>
+
+    <h3>Clicking a player</h3>
+
+    <p>
+        In any view, you can click (desktop) or tap (mobile) a player's row to
+        expand their <strong>flight history panel</strong>. You'll see every
+        flight they've taken that the backend has observed, with times and
+        destinations. This is where pattern-spotting happens:
+        <em>"this guy always flies Japan around downtime,"</em> or
+        <em>"they always go Cayman for stat training."</em>
+    </p>
+
+    <div class="callout">
+        <span class="label">Building up history</span>
+        Flight history builds up over time. When the tool was first deployed,
+        everyone's history was empty. After a week of watching a war,
+        players will have 5-10 entries each. After a month of on-and-off
+        coverage, you'll have genuinely useful behavioural patterns.
+    </div>
+
+    <h3>The Fly / Refresh / Export buttons</h3>
+
+    <p>
+        <span class="kbd">✈ Fly</span> opens the Torn travel agency in a new tab — handy if you see an
+        enemy land and want to chase them. <span class="kbd">↻ Refresh</span> forces an immediate
+        refresh instead of waiting for the next automatic poll.
+        <span class="kbd">⬇ Export</span> dumps the current roster to a .txt file for sharing
+        in Discord or wherever.
+    </p>
+</section>
+
+<!-- ─────────────────────────────────────────────── -->
+<!--  §07 TROUBLE                                    -->
+<!-- ─────────────────────────────────────────────── -->
+<section id="trouble">
+    <h2><span class="section-num">§07</span> Things to check if it's not working</h2>
+    <div class="section-meta">Most common issues &amp; their fixes</div>
+
+    <p>
+        If something's off, scan this list first before asking in Discord —
+        nine times out of ten the answer is here.
+    </p>
+
+    <div class="trouble">
+        <div class="row">
+            <div class="symptom">The panel doesn't appear at all</div>
+            <div class="cause">Tampermonkey isn't running, the script isn't enabled, or you're on the wrong page.</div>
+            <div class="fix">
+                Click the Tampermonkey icon in your browser toolbar → make sure
+                the switch at the top is green (enabled). Click "Dashboard" and
+                confirm <strong>Torn War Intelligence Dashboard</strong> is in
+                the list and toggled on. Then reload a
+                <a class="link" href="https://www.torn.com" target="_blank">torn.com</a> page.
+            </div>
         </div>
-        <div class="dl-buttons">
-            <a class="dl-btn dl-btn-red"    href="https://greasyfork.org/en/scripts/574906-torn-war-intelligence-dashboard-v6-3" target="_blank">⬇ Install Desktop Script</a>
-            <a class="dl-btn dl-btn-purple" href="https://greasyfork.org/en/scripts/574909-torn-war-intelligence-tornpda-mobile" target="_blank">⬇ Install TornPDA Script</a>
+
+        <div class="row">
+            <div class="symptom">"Access Denied — Diamond Cartel members only"</div>
+            <div class="cause">Your API key belongs to someone whose faction ID isn't 48822.</div>
+            <div class="fix">
+                Either you're not in Diamond Cartel (in which case the tool isn't
+                for you) or you pasted the wrong API key — possibly a friend's
+                or an old one from before you joined. Double-check the key in
+                settings is from <em>your</em> current account.
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="symptom">The status dot stays <span class="dot grey"></span>grey</div>
+            <div class="cause">No API key entered yet, or it's still on the very first connection attempt.</div>
+            <div class="fix">
+                Open Settings, check your key is there. If it is and the dot
+                stays grey more than 10 seconds, click Refresh. If still grey,
+                something is blocking the connection — check the "Orange dot"
+                row below.
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="symptom">The status dot is <span class="dot orange"></span>orange</div>
+            <div class="cause">Backend is unreachable. Tool is still working, just using direct Torn polling.</div>
+            <div class="fix">
+                Usually self-heals within a minute. Hover (desktop) or tap
+                (mobile) the dot to see the error. "timeout" or "network" means
+                the backend is briefly down — wait a bit.
+                If it's been orange for more than 10 minutes, mention it in Discord —
+                it's probably a Railway issue on our side.
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="symptom">"No active ranked war detected"</div>
+            <div class="cause">Correct behaviour when we're not in a war.</div>
+            <div class="fix">
+                War Intel only activates during ranked wars. Between wars the
+                panel shows this message and does nothing. It'll wake up
+                automatically within 2 minutes of a new war starting.
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="symptom">Flight history is empty for every player</div>
+            <div class="cause">Either the war just started, or you're on orange (fallback) mode.</div>
+            <div class="fix">
+                Flight history is accumulated by the backend over time. A fresh
+                war with a new enemy means everyone starts with 0-1 flights
+                logged. On orange/fallback mode, history is local to your
+                browser only — it'll merge with the backend's full history
+                once you're back on green.
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="symptom">FFScouter stats column shows "—" for everyone</div>
+            <div class="cause">Backend's FFScouter cache hasn't populated yet, or the war just started.</div>
+            <div class="fix">
+                The backend refreshes FFScouter data every 5 minutes. Give it a
+                single 5-minute cycle after war detection and the column will
+                fill in. If it stays empty for 15+ minutes, report in Discord.
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="symptom">Everything worked, then stopped after a Torn update</div>
+            <div class="cause">Torn occasionally changes how the API responds, which can briefly break the fallback path.</div>
+            <div class="fix">
+                The backend path is resilient — if your dot is green, you're
+                fine. If it's orange <em>and</em> nothing works, check Discord
+                for an announcement of an updated script version.
+            </div>
         </div>
     </div>
 
-    <!-- TOC -->
-    <div class="toc">
-        <h4>Contents</h4>
-        <ol>
-            <li><a href="#overview">Overview</a></li>
-            <li><a href="#keys">What You Need — API Keys</a></li>
-            <li><a href="#desktop-install">Desktop Installation (Tampermonkey)</a></li>
-            <li><a href="#mobile-install">TornPDA Installation (Mobile)</a></li>
-            <li><a href="#desktop-features">Desktop Features</a></li>
-            <li><a href="#mobile-features">TornPDA Features</a></li>
-            <li><a href="#export">Export Report</a></li>
-            <li><a href="#tiers">Threat Tier Reference</a></li>
-            <li><a href="#troubleshooting">Troubleshooting</a></li>
-        </ol>
-    </div>
+    <h3>Still stuck?</h3>
+    <p>
+        Post in <code>#war-intel</code> on Discord with: the colour of your dot,
+        the error message if any, and whether you're on desktop or TornPDA.
+        Screenshots help a lot. Don't post your API key — ever.
+    </p>
+</section>
 
-    <!-- Overview -->
-    <h2 id="overview">Overview</h2>
-    <div class="info-box" style="border-left-color:#e05252;margin-bottom:16px;">
-        <div class="info-title" style="color:#e05252;">🔒 Diamond Cartel Exclusive</div>
-        <p>This script is exclusively for members of <strong style="color:#fff">Diamond Cartel</strong>. The script verifies your faction membership via the Torn API on every load — if you leave the faction the script will no longer function. Developed by <strong style="color:#fff">OfficialSVK</strong>.</p>
-    </div>
-    <p>War Intel is a userscript that automatically detects your active Torn ranked war, pulls enemy faction member data, and enriches it with battle stat and Fair Fight predictions from FFScouter — displayed in a live dashboard that refreshes automatically.</p>
-    <ul>
-        <li><strong>Desktop</strong> — Floating, resizable panel with sortable columns, filter views, attack buttons, hospital timers, and a formatted HTML export for Torn mail. Installed via Tampermonkey.</li>
-        <li><strong>TornPDA (Mobile)</strong> — Full-width bottom sheet with filter tabs, card-based member view, FF scores, hospital/jail timers, travel status, and one-tap attack links. Installed via TornPDA's built-in script manager.</li>
-    </ul>
-
-    <!-- Keys -->
-    <h2 id="keys">What You Need — API Keys</h2>
-    <h3>1. Torn API Key</h3>
-    <p>Your Torn API key lets the script fetch faction war data and enemy member information.</p>
-    <div class="info-box">
-        <div class="info-title">🔑 Generating your Torn API Key</div>
-        <p><span class="label">Settings page:</span> <a href="https://www.torn.com/preferences.php#tab=api" target="_blank">torn.com → Preferences → API</a></p>
-        <p><span class="label">Direct link (pre-fills required permissions):</span><br>
-        <a href="https://www.torn.com/preferences.php#tab=api?step=addNewKey&title=WarIntel&faction=basic,rankedwars,members" target="_blank">Generate key with faction: basic, rankedwars, members</a></p>
-    </div>
-    <table class="data-table">
-        <thead><tr><th>Permission</th><th>Required?</th><th>Why it's needed</th></tr></thead>
-        <tbody>
-            <tr><td class="name"><code>faction → basic</code></td><td class="yes">Yes</td><td>Identifies your faction name and ID</td></tr>
-            <tr><td class="name"><code>faction → rankedwars</code></td><td class="yes">Yes</td><td>Detects your active ranked war and scores</td></tr>
-            <tr><td class="name"><code>faction → members</code></td><td class="yes">Yes</td><td>Fetches the enemy member list with live status</td></tr>
-        </tbody>
-    </table>
-    <div class="warn-box"><strong>⚠ Note:</strong> A <strong>Limited Access</strong> or <strong>Full Access</strong> key includes all of the above by default. If using a <strong>Custom Key</strong>, make sure all three faction selections are ticked.</div>
-
-    <h3>2. FFScouter Key (Optional but Recommended)</h3>
-    <p>FFScouter is a free community tool that estimates enemy battle stats and Fair Fight scores. Without it the dashboard shows names, IDs, levels and status — but Est. Stats, FF scores and stat distribution will be empty.</p>
-    <div class="info-box">
-        <div class="info-title">🔑 Registering with FFScouter</div>
-        <p>Visit <a href="https://ffscouter.com/" target="_blank">ffscouter.com</a> and sign up using the same Torn API key you use for this script. You must read and agree to the FFScouter Data Policy — the script will prompt you to confirm this when you enter your key.</p>
-        <p><span class="label">Your FFScouter key is the same 16-character Torn API key you registered with on their site.</span></p>
-    </div>
-
-    <!-- Desktop Install -->
-    <h2 id="desktop-install">Desktop Installation (Tampermonkey)</h2>
-    <h3>Step 1 — Install Tampermonkey</h3>
-    <p>Tampermonkey is a free browser extension that runs userscripts. Install it from <a href="https://www.tampermonkey.net/" target="_blank">tampermonkey.net</a> — supports Chrome, Edge, Firefox, and Safari.</p>
-    <div class="warn-box"><strong>⚠ Chrome users:</strong> If the script doesn't appear after installation, enable Developer Mode in Chrome's Extensions settings. See <a href="https://www.tampermonkey.net/faq.php#Q209" target="_blank">tampermonkey.net/faq#Q209</a>.</div>
-
-    <h3>Step 2 — Install the Script</h3>
-    <div class="steps">
-        <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">Install from Greasy Fork</div><p class="step-desc">Visit <a href="https://greasyfork.org/en/scripts/574906-torn-war-intelligence-dashboard-v6-3" target="_blank">greasyfork.org — Torn War Intelligence Dashboard</a> and click <strong>Install this script</strong>.</p></div></div>
-        <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">Confirm installation</div><p class="step-desc">Tampermonkey opens a new tab showing the script details. Click <strong>Install</strong> to confirm.</p></div></div>
-        <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Navigate to Torn</div><p class="step-desc">Open <a href="https://www.torn.com" target="_blank">torn.com</a>. The ⚔ WAR INTEL panel appears in the top-right corner of the page.</p></div></div>
-    </div>
-
-    <h3>Step 3 — Enter Your API Keys</h3>
-    <div class="steps">
-        <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">Open Settings</div><p class="step-desc">Click <strong>⚙ Settings</strong> in the War Intel panel header.</p></div></div>
-        <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">Agree to FFScouter policy</div><p class="step-desc">Read the FFScouter data policy (linked in the panel) and tick the checkbox to confirm.</p></div></div>
-        <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Enter your keys</div><p class="step-desc">Paste your Torn API key into <strong>TORN API KEY</strong> and optionally your FFScouter key into <strong>FFSCOUTER KEY</strong>.</p></div></div>
-        <div class="step"><div class="step-num">4</div><div class="step-body"><div class="step-title">Save &amp; Fetch</div><p class="step-desc">Click <strong>💾 Save &amp; Fetch</strong>. Enemy members load automatically if your faction is in an active ranked war.</p></div></div>
-    </div>
-
-    <!-- Mobile Install -->
-    <h2 id="mobile-install">TornPDA Installation (Mobile)</h2>
-    <p>TornPDA is a mobile client for Torn with a built-in userscript manager — no separate extension needed.</p>
-    <h3>Step 1 — Install TornPDA</h3>
-    <p>Download TornPDA from the App Store (iOS) or Google Play (Android) and log in with your Torn account.</p>
-    <h3>Step 2 — Install the Script</h3>
-    <div class="steps">
-        <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">Open TornPDA Userscripts</div><p class="step-desc">Tap the profile icon → <strong>Settings</strong> → <strong>Userscripts</strong>.</p></div></div>
-        <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">Add from Greasy Fork</div><p class="step-desc">Tap <strong>+</strong> and enter the URL: <a href="https://greasyfork.org/en/scripts/574909-torn-war-intelligence-tornpda-mobile" target="_blank">greasyfork.org — Torn War Intelligence TornPDA Mobile</a></p></div></div>
-        <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Enable and restart</div><p class="step-desc">Make sure the script is toggled <strong style="color:var(--green)">ON</strong>. Fully restart TornPDA.</p></div></div>
-        <div class="step"><div class="step-num">4</div><div class="step-body"><div class="step-title">Navigate to Torn</div><p class="step-desc">Open any Torn page. The ⚔ WAR INTEL bar appears at the bottom of the screen. Tap it to expand.</p></div></div>
-    </div>
-    <h3>Step 3 — Enter Your API Keys</h3>
-    <p>Tap ⚙ in the panel header, agree to the FFScouter policy, enter your keys, and tap <strong>💾 Save &amp; Fetch</strong>.</p>
-
-    <!-- Desktop Features -->
-    <h2 id="desktop-features">Desktop Features</h2>
-
-    <h3>Panel &amp; Layout</h3>
-    <div class="feature-grid">
-        <div class="feature-card"><div class="fc-icon">↔</div><div class="fc-title">Resizable Window</div><div class="fc-desc">Drag the triangle grip in the bottom-right corner to resize the panel to any width or height.</div></div>
-        <div class="feature-card"><div class="fc-icon">⟺</div><div class="fc-title">Resizable Columns</div><div class="fc-desc">Hover over the right edge of any column header and drag to adjust that column's width independently.</div></div>
-        <div class="feature-card"><div class="fc-icon">✕</div><div class="fc-title">Hide to Side Button</div><div class="fc-desc">Click ✕ to hide the panel completely. A small ⚔ WAR tab appears on the left edge of the screen — click it to restore. State persists between page changes.</div></div>
-        <div class="feature-card"><div class="fc-icon">↻</div><div class="fc-title">Auto-Refresh</div><div class="fc-desc">Panel refreshes every 60 seconds automatically to keep hospital, travel, and status current during war.</div></div>
-    </div>
-
-    <h3>Filter Views</h3>
-    <div class="tab-demo">
-        <div class="tab active">⚔ By Stats</div>
-        <div class="tab">⏱ By Timer</div>
-    </div>
-    <ul>
-        <li><strong>⚔ By Stats</strong> — Default view. All members sorted and grouped into threat tiers by estimated battle stats. All columns are sortable by clicking the headers.</li>
-        <li><strong>⏱ By Timer</strong> — Reorganises the table into sections based on availability: <em>In Hospital/Jail</em> (soonest out first), <em>Out Soon</em> (timer expired), and <em>Available Now</em> (sorted by stats). Ideal for timing attacks during a war.</li>
-    </ul>
-
-    <h3>Columns</h3>
-    <table class="data-table">
-        <thead><tr><th>Column</th><th>Description</th></tr></thead>
-        <tbody>
-            <tr><td class="name">Name</td><td>Player name (links to profile) with a <strong>⚔</strong> attack button — click ⚔ to go directly to the attack page</td></tr>
-            <tr><td class="name">ID</td><td>Torn player ID</td></tr>
-            <tr><td class="name">Lvl</td><td>Player level</td></tr>
-            <tr><td class="name">Status</td><td>Full current status from the Torn API (e.g. "Traveling to Japan", "In hospital")</td></tr>
-            <tr><td class="name">Free In</td><td>Live countdown for hospitalised or jailed players — ticks every second. Shows "Soon ✓" when timer expires.</td></tr>
-            <tr><td class="name">Est. Stats</td><td>FFScouter's estimated total battle stats (e.g. 2.99b, 450m)</td></tr>
-            <tr><td class="name">FF</td><td>Fair Fight score — <span style="color:#4caf50">green &lt;1.5</span>, <span style="color:#ffc107">yellow 1.5–2.49</span>, <span style="color:#ff7043">red ≥2.5</span></td></tr>
-            <tr><td class="name">Dist.</td><td>Stat distribution e.g. STR 60% SPD 30% (FFScouter premium only)</td></tr>
-            <tr><td class="name">Data Age</td><td>How old FFScouter's estimate is for that player</td></tr>
-        </tbody>
-    </table>
-
-    <h3>Other Tools</h3>
-    <ul>
-        <li><strong>⬇ Export</strong> — Downloads a TXT file containing HTML markup. Open it, select all, copy, and paste into Torn mail or a forum post. The report groups members into threat tiers with your faction vs enemy header and clickable profile links.</li>
-        <li><strong>🔍 Debug mode</strong> — Click the magnifying glass icon and open Settings to see raw API responses — useful if something isn't loading correctly.</li>
-        <li><strong>✕ Hide</strong> — Click ✕ to hide the panel to a small ⚔ WAR side tab. The state persists between page changes so the panel stays hidden until you click the tab to restore it.</li>
-    </ul>
-
-    <!-- Mobile Features -->
-    <h2 id="mobile-features">TornPDA Features</h2>
-
-    <h3>Panel &amp; Navigation</h3>
-    <div class="feature-grid">
-        <div class="feature-card"><div class="fc-icon">▲▼</div><div class="fc-title">Expand / Collapse</div><div class="fc-desc">Tap the header bar or ▲/▼ arrow to show or hide the panel. Collapse state persists between page changes.</div></div>
-        <div class="feature-card"><div class="fc-icon">⚔</div><div class="fc-title">Side Button</div><div class="fc-desc">When collapsed, a small ⚔ WAR tab appears on the edge of the screen. Tap it to expand. Choose Left or Right side in Settings.</div></div>
-        <div class="feature-card"><div class="fc-icon">👆</div><div class="fc-title">One-Tap Attack</div><div class="fc-desc">Tap a player name to go straight to their attack page. The panel automatically collapses so you have a clear screen to attack from.</div></div>
-        <div class="feature-card"><div class="fc-icon">↻</div><div class="fc-title">Auto-Refresh</div><div class="fc-desc">Refreshes every 90 seconds automatically to keep status and hospital timers current.</div></div>
-    </div>
-
-    <h3>Filter Tabs</h3>
-    <div class="tab-demo">
-        <div class="tab active">⚔ Stats</div>
-        <div class="tab">⏱ Timer</div>
-    </div>
-    <ul>
-        <li><strong>⚔ Stats</strong> — Default view. Members grouped into colour-coded threat tiers by estimated battle stats. Each card shows name, ID, level, estimated stats, Fair Fight score (colour coded), stat distribution, current status, and a hospital/jail countdown timer where applicable. Tap any tier header to collapse or expand that group.</li>
-        <li><strong>✈ Fly button</strong> — Tap the ✈ Fly button in the header to go directly to the Torn Travel Agency page.</li>
-        <li><strong>⏱ Timer</strong> — Sorts members by availability. Four sections, each collapsible:</li>
-    </ul>
-
-    <div class="timer-sections">
-        <div class="timer-section"><div class="ts-icon">⏱</div><div><div class="ts-label" style="color:#e05252">In Hospital / Jail</div><div style="font-size:12px;color:#666;">Sorted soonest out first. Live countdown on each card.</div></div><div class="ts-desc">Unavailable</div></div>
-        <div class="timer-section"><div class="ts-icon">✓</div><div><div class="ts-label" style="color:#4caf50">Out Soon</div><div style="font-size:12px;color:#666;">Timer expired, awaiting next refresh.</div></div><div class="ts-desc">Coming up</div></div>
-        <div class="timer-section"><div class="ts-icon">✈</div><div><div class="ts-label" style="color:#7a9aff">Traveling / Abroad</div><div style="font-size:12px;color:#666;">Shows destination (e.g. "Traveling to Japan"). No arrival time — Torn keeps flight times private.</div></div><div class="ts-desc">Unavailable</div></div>
-        <div class="timer-section"><div class="ts-icon">✦</div><div><div class="ts-label" style="color:#7a7aff">Available Now</div><div style="font-size:12px;color:#666;">Everyone free, sorted by stats descending.</div></div><div class="ts-desc">Hit now</div></div>
-    </div>
-
-    <h3>Member Cards</h3>
-    <p>Each member is shown as a card with:</p>
-    <ul>
-        <li><strong>Left side</strong> — Player name (tap to attack), Torn ID, level, stat distribution</li>
-        <li><strong>Right side</strong> — Estimated battle stats, Fair Fight score (colour coded), current status badge, hospital/jail countdown timer</li>
-    </ul>
-    <p>Fair Fight colours: <span style="color:#4caf50">■</span> Easy (&lt;1.5) &nbsp; <span style="color:#ffc107">■</span> Fair (1.5–2.49) &nbsp; <span style="color:#ff7043">■</span> Hard (≥2.5)</p>
-
-    <h3>Export (Mobile)</h3>
-    <ul>
-        <li><strong>iOS</strong> — Tap ⬇ to copy the full report HTML to your clipboard. A green toast confirms it. Open Torn mail and paste directly.</li>
-        <li><strong>Android</strong> — Tap ⬇ to download a TXT file containing the HTML report.</li>
-    </ul>
-    <p>The report groups members into threat tiers with your faction vs enemy header and clickable Torn profile links — ready to paste into faction mail or a forum post.</p>
-
-    <!-- Export Format -->
-    <h2 id="export">Export Report Format</h2>
-    <p>Both desktop and mobile produce the same export format — HTML markup that renders in Torn mail and forum posts. The report includes:</p>
-    <ul>
-        <li><strong>Header</strong> — Your faction name vs enemy faction name, plus total enemy count</li>
-        <li><strong>Threat tier sections</strong> — Members grouped and sorted by estimated stats within each tier</li>
-        <li><strong>Per member</strong> — Name (clickable profile link), Torn ID, estimated stats, and stat distribution where available</li>
-    </ul>
-
-    <!-- Tiers -->
-    <h2 id="tiers">Threat Tier Reference</h2>
-    <table class="data-table">
-        <thead><tr><th>Tier</th><th>Stat Range</th><th>Notes</th></tr></thead>
-        <tbody>
-            <tr><td class="name"><span class="dot" style="background:#cc3333"></span>High-Level Threats</td><td>Over 1B</td><td>Top priority — coordinate attacks carefully</td></tr>
-            <tr><td class="name"><span class="dot" style="background:#e07000"></span>Mid-Level Threats</td><td>100M – 999M</td><td>Significant threats, plan before attacking</td></tr>
-            <tr><td class="name"><span class="dot" style="background:#ccaa00"></span>Low-Level Threats</td><td>1M – 99M</td><td>Manageable individually</td></tr>
-            <tr><td class="name"><span class="dot" style="background:#4a9a4a"></span>Cannon Fodder</td><td>Under 1M</td><td>Easy hits for chains and score</td></tr>
-            <tr><td class="name"><span class="dot" style="background:#555577"></span>Too Low</td><td>Under 1K</td><td>Minimal threat or reward</td></tr>
-            <tr><td class="name"><span class="dot" style="background:#444455"></span>No Data</td><td>Unknown</td><td>FFScouter has no estimate yet — likely new or inactive players</td></tr>
-        </tbody>
-    </table>
-
-    <!-- Troubleshooting -->
-    <h2 id="troubleshooting">Troubleshooting</h2>
-
-    <h3>"No active ranked war found"</h3>
-    <p>Normal outside of war periods. The dashboard detects wars automatically — no action needed.</p>
-
-    <h3>"Torn API: ... (code 23)"</h3>
-    <p>Your API key is missing a required permission. Use the direct link in the <a href="#keys">What You Need</a> section to generate a new key, or manually add <code>faction → basic</code>, <code>rankedwars</code>, and <code>members</code> to an existing key.</p>
-
-    <h3>FFScouter shows "—" in Est. Stats or FF columns</h3>
-    <ul>
-        <li>FFScouter only has estimates for players attacked recently by other FFScouter users. New or inactive players may have no data.</li>
-        <li>Confirm your FFScouter key is registered at <a href="https://ffscouter.com/" target="_blank">ffscouter.com</a>.</li>
-    </ul>
-
-    <h3>Hospital timer shows but doesn't tick</h3>
-    <p>The ticker starts when the page loads. Try refreshing the Torn page. If the timer shows "—" the player's status has no <code>until</code> timestamp — this happens for traveling players or when the API returns a non-hospital/jail state.</p>
-
-    <h3>No flight arrival timer for traveling players</h3>
-    <p>Torn keeps flight arrival times private — they are not included in the API response. The Timer view shows who is traveling and their destination, but a countdown isn't possible with the available data.</p>
-
-    <h3>Panel not appearing on Desktop</h3>
-    <ul>
-        <li>Check the script is enabled in the Tampermonkey dashboard.</li>
-        <li>Chrome users: enable Developer Mode in Chrome Extensions — see <a href="https://www.tampermonkey.net/faq.php#Q209" target="_blank">tampermonkey.net/faq#Q209</a>.</li>
-        <li>If you previously clicked ✕ to hide the panel, look for the small ⚔ WAR tab on the left edge of the screen and click it to restore the panel.</li>
-    </ul>
-
-    <h3>Script not appearing in TornPDA</h3>
-    <ul>
-        <li>Fully close and reopen TornPDA after installing the script.</li>
-        <li>Confirm the script is toggled <strong style="color:var(--green)">ON</strong> in Settings → Userscripts.</li>
-        <li>Make sure you are on a <code>torn.com</code> page — the script only runs on Torn.</li>
-    </ul>
-
-    <h3>Export does nothing on iOS</h3>
-    <p>iOS blocks file downloads from in-app browsers. The export copies the report to your clipboard instead — a green toast confirms this. Open Torn mail and paste.</p>
-
-    <h3>"Access Denied" screen appears</h3>
-    <p>The script verifies your Torn API key belongs to an active Diamond Cartel member on every load. If you see the 🔒 Access Denied screen it means the key you entered is not associated with a Diamond Cartel member. Make sure you are using your own key and that you are still in the faction.</p>
-
-    <h3>General errors or broken behaviour</h3>
-    <p>Re-install by uninstalling the current script and reinstalling from Greasy Fork using the links at the top of this guide.</p>
-
-    <div class="footer">⚔ War Intel — Setup &amp; Feature Guide &nbsp;·&nbsp; OfficialSVK's Torn City Userscript<br><span style="font-size:11px;color:#333;">© 2026 OfficialSVK — Diamond Cartel. All rights reserved. Exclusively for Diamond Cartel members.</span></div>
+<!-- ─────────────────────────────────────────────── -->
+<!--  FOOTER                                         -->
+<!-- ─────────────────────────────────────────────── -->
+<footer>
+    <span class="diamond">◆ Diamond Cartel</span>
+    <span>Field Manual · DOC/WI-03 · Rev 1.0 · 2026</span>
+</footer>
 
 </div>
+
+<script>
+// Smooth-scroll the TOC offset so headers aren't glued to the top
+document.querySelectorAll('nav.toc a').forEach(a => {
+    a.addEventListener('click', (e) => {
+        e.preventDefault();
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) {
+            window.scrollTo({
+                top: target.getBoundingClientRect().top + window.scrollY - 24,
+                behavior: 'smooth'
+            });
+        }
+    });
+});
+</script>
+
 </body>
 </html>
