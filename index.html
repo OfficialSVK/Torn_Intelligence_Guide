@@ -122,7 +122,7 @@
         <a class="btn btn-primary" href="https://greasyfork.org/en/scripts/574906" target="_blank" rel="noopener">Install for desktop</a>
         <a class="btn btn-outline" href="https://greasyfork.org/en/scripts/574909" target="_blank" rel="noopener">Install for TornPDA</a>
     </div>
-    <p class="versions">Current versions: desktop 6.16.0, TornPDA 3.9.0</p>
+    <p class="versions">Current versions: desktop 6.18.0, TornPDA 3.11.0</p>
 </header>
 
 <figure class="hero-shot">
@@ -291,13 +291,26 @@
 <section id="claims">
 <h2>Claiming targets</h2>
 <div class="prose">
-    <p>Claims stop two people from your faction hitting the same enemy. Everyone running War Intel sees them within a couple of seconds.</p>
+    <p>Claims stop two people from your faction hitting the same enemy. Everyone running War Intel sees a new claim within about 5 seconds.</p>
     <ul class="plain">
         <li><strong>Claim</strong> marks an enemy as yours. The button turns brass and changes to <strong>Unclaim</strong>.</li>
-        <li>An enemy someone else has claimed shows <strong>Taken</strong> with that person's name, and can't be claimed until they let go.</li>
-        <li><strong>Unclaim</strong> releases your claim.</li>
-        <li>When an enemy you've claimed goes into hospital, which usually means your hit landed, the claim is released for you. If you claim someone who's already in hospital, the claim stays until you release it, so you can call dibs on them for when they come out.</li>
+        <li>An enemy someone else has claimed shows <strong>Taken</strong> with that person's name. Their name turns grey and is locked: you can't claim them or open the attack from War Intel. Selecting the name tells you who has them.</li>
+        <li><strong>Unclaim</strong> releases your claim so someone else can take them.</li>
+        <li>When an enemy you've claimed goes into hospital, which usually means your hit landed, the claim is released for you.</li>
+        <li>Every claim lapses after 20 minutes, in case someone forgets about one. That includes claims on enemies who were already in hospital, so claim them again if you still want them when they come out.</li>
     </ul>
+    <p class="note">The lock only works inside War Intel. Torn's own pages, like the enemy's profile or the faction page, still let anyone attack. Please respect claims there too.</p>
+    <p>Claiming needs desktop 6.17.0 or TornPDA 3.10.0 or newer. Older versions can't claim at all, so update if the Claim button isn't working.</p>
+</div>
+<div class="pair">
+    <figure>
+        <img src="images/d-claims.png" width="648" height="195" loading="lazy" alt="Desktop Stats tab: SableQuill shows a brass Unclaim button because you claimed them. Lantern's name is grey and their claim column reads Taken, Rook.">
+        <figcaption>Desktop: your claim in brass, and Lantern locked because Rook has them.</figcaption>
+    </figure>
+    <figure>
+        <img src="images/m-claims.png" width="375" height="438" loading="lazy" alt="TornPDA cards: SableQuill shows You and a brass Unclaim button. Lantern's name is grey with Rook and Taken under it.">
+        <figcaption>TornPDA: the same claims on cards.</figcaption>
+    </figure>
 </div>
 </section>
 
@@ -427,6 +440,14 @@
     <details>
         <summary>A traveller shows "In flight" with no time</summary>
         <div><p>They were already in the air when the server started watching, so their take-off time is unknown. Their next flight will be timed.</p></div>
+    </details>
+    <details>
+        <summary>An enemy's name is grey and won't open the attack</summary>
+        <div><p>Someone else in your faction has claimed them. Their name shows next to Taken. The name unlocks when they release the claim, the enemy goes into hospital, or the claim reaches 20 minutes.</p></div>
+    </details>
+    <details>
+        <summary>The Claim button doesn't work</summary>
+        <div><p>Make sure you're on desktop 6.17.0 or TornPDA 3.10.0 or newer. Older versions can't claim any more.</p></div>
     </details>
     <details>
         <summary>The panel has disappeared</summary>
